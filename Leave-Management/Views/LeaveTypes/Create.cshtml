@@ -1,0 +1,26 @@
+﻿@model Leave_Management.Models.ViewModels.LeaveTypeCreateViewModel
+
+@{
+    ViewData["Title"] = "ثبت نوع مرخصی جدید";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ثبت نوع مرخصی جدید</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post" asp-controller="LeaveTypes">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ثبت نوع مرخصی جدید" class="btn btn-primary" />
+                <a class="btn btn-outline-secondary" asp-action="Index">بازگشت به فهرست</a>
+            </div>
+        </form>
+    </div>
+</div>

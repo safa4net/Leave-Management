@@ -13,12 +13,14 @@ namespace Leave_Management.Models.ViewModels
         public string Name { get; set; }
 
         [Display(Name = "تاریخ ایجاد")]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         public DateTime DateCreated { get; set; }
     }
 
     public class LeaveTypeCreateViewModel
     {
+        public int Id { get; set; }
+
         [Display(Name = "علت مرخصی")]
         [Required(ErrorMessage = "ورود نام برای {0} الزامی است.")]
         [StringLength(100, ErrorMessage = "تعداد حروف {0} می بایست بین {1} حرف و {2} باشد.", MinimumLength = 3)]

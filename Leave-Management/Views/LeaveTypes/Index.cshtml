@@ -53,5 +53,13 @@
 </table>
 
 @section Scripts{
-    <script src="~/js/site.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#tblData').DataTable( {
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Persian.json"
+                }
+            } );
+        } );
+    </script>
 }

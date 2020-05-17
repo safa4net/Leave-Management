@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
     <link href="~/lib/bootstrap-rtl/bootstrap.rtl.css" rel="stylesheet" />
-    
+
     <link href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 
@@ -26,22 +26,22 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">صفحه اصلی</a>
-                        </li>
+                        </li>*@
 
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">درخواست مرخصی</a>
-                        </li>
-                        <li class="nav-item dropdown">
+                        </li>*@
+                        <li class="nav-item dropdown" >
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 مدیریت مرخصی ها
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" asp-controller="LeaveTypes" asp-action="Index">مریدیت مرخصی ها</a>
-                                <a class="dropdown-item" href="#">درخواست های مرخصی</a>
-                                <a class="dropdown-item" href="#">مرخصی های ثبت شده</a>
-                                <a class="dropdown-item" href="#">کارمندان</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" >
+                                <a class="dropdown-item" asp-controller="LeaveTypes" asp-action="Index" style="font-size: small">مریدیت مرخصی ها</a>
+                                <a class="dropdown-item" href="#" style="font-size: small">درخواست های مرخصی</a>
+                                <a class="dropdown-item" href="#" style="font-size: small">مرخصی های ثبت شده</a>
+                                <a class="dropdown-item" href="#" style="font-size: small">کارمندان</a>
                             </div>
                         </li>
                     </ul>

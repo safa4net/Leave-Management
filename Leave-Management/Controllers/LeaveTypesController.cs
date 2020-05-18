@@ -5,11 +5,12 @@ using AutoMapper;
 using Leave_Management.Contracts;
 using Leave_Management.Data;
 using Leave_Management.Models.ViewModels;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Leave_Management.Controllers
 {
+    [Authorize(Roles = "Administrator,Employee")]
     public class LeaveTypesController : Controller
     {
         private readonly ILeaveTypeRepository _repo;
@@ -20,7 +21,6 @@ namespace Leave_Management.Controllers
             _repo = repo;
             _mapper = mapper;
         }
-
 
         // GET: LeaveTypes
         public ActionResult Index()
@@ -41,6 +41,7 @@ namespace Leave_Management.Controllers
         }
 
         // GET: LeaveTypes/Create
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             return View();
@@ -49,6 +50,7 @@ namespace Leave_Management.Controllers
         // POST: LeaveTypes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create(LeaveTypeCreateViewModel viewModel)
         {
             try
@@ -73,7 +75,9 @@ namespace Leave_Management.Controllers
             }
         }
 
+        
         // GET: LeaveTypes/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int id)
         {
             var isExists = _repo.IsExists(id);
@@ -85,9 +89,11 @@ namespace Leave_Management.Controllers
             return View(model);
         }
 
+        
         // POST: LeaveTypes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(LeaveTypeDetailsViewModel viewModel)
         {
             try
@@ -112,6 +118,7 @@ namespace Leave_Management.Controllers
         }
 
         // GET: LeaveTypes/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int id)
         {
             var isExists = _repo.IsExists(id);
@@ -131,6 +138,7 @@ namespace Leave_Management.Controllers
         // POST: LeaveTypes/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int id, LeaveTypeDetailsViewModel viewModel)
         {
             try

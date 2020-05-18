@@ -1,7 +1,10 @@
-﻿@model IEnumerable<Leave_Management.Models.ViewModels.LeaveTypeDetailsViewModel>
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<Leave_Management.Models.ViewModels.LeaveTypeDetailsViewModel>
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "فهرست انواع مرخصی";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -37,14 +40,17 @@
                     @Html.DisplayFor(modelItem => item.DateCreated)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">
-                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                    </a>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm" onclick="return confirm('آیا از حذف این مورد اطمینان دارد؟')">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                    }
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-sm">
                         <i class="fa fa-info-circle" aria-hidden="true"></i>
-                    </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm" onclick="return confirm('آیا از حذف این مورد اطمینان دارد؟')">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
                 </td>
             </tr>
@@ -54,12 +60,12 @@
 
 @section Scripts{
     <script>
-        $(document).ready(function() {
-            $('#tblData').DataTable( {
+        $(document).ready(function () {
+            $('#tblData').DataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Persian.json"
                 }
-            } );
-        } );
+            });
+        });
     </script>
 }

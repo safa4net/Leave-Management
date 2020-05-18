@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <Compile Remove="Contracts\IEmployeeRepository.cs" />
+    <Compile Remove="Data\Migrations\20200517001903_Identity.cs" />
+    <Compile Remove="Data\Migrations\20200517001903_Identity.Designer.cs" />
     <Compile Remove="Repository\EmployeeRepository.cs" />
   </ItemGroup>
 

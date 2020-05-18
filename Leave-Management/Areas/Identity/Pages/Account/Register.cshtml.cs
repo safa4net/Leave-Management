@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Leave_Management.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -20,12 +20,14 @@ namespace Leave_Management.Areas.Identity.Pages.Account
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
@@ -34,6 +36,7 @@ namespace Leave_Management.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         [BindProperty]
@@ -60,6 +63,21 @@ namespace Leave_Management.Areas.Identity.Pages.Account
             [Display(Name = "تائید رمز عبور")]
             [Compare("Password", ErrorMessage = "رمز عبور وارد شده و تکرار آن با هم مطابقت ندارد.")]
             public string ConfirmPassword { get; set; }
+
+            [Required(ErrorMessage = "ورود {0} کاربر الزامی می باشد.")]
+            [Display(Name = "نام")]
+            [DataType(DataType.Text)]
+            public string Firstname { get; set; }
+
+            [Required(ErrorMessage = "ورود {0} کاربر الزامی می باشد.")]
+            [Display(Name = "نام خانوادگی")]
+            [DataType(DataType.Text)]
+            public string Lastname { get; set; }
+
+            [Required(ErrorMessage = "ورود {0} کاربر الزامی می باشد.")]
+            [Display(Name = "تلفن همراه")]
+            [DataType(DataType.PhoneNumber)]
+            public string PhoneNumber { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -70,45 +88,64 @@ namespace Leave_Management.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) 
+                return Page();
+
+            var user = new Employee
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
-                var result = await _userManager.CreateAsync(user, Input.Password);
-                if (result.Succeeded)
+                UserName = Input.Email,
+                Email = Input.Email,
+                Firstname = Input.Firstname,
+                Lastname = Input.Lastname,
+                PhoneNumber = Input.PhoneNumber
+            };
+            var result = await _userManager.CreateAsync(user, Input.Password);
+
+            if (result.Succeeded)
+            {
+                _logger.LogInformation("User created a new account with password.");
+
+                var adminUserExists = await _userManager.FindByNameAsync("Administrator").ConfigureAwait(false);
+                var employeeRoleExists = await _roleManager.FindByNameAsync("Employee").ConfigureAwait(false);
+                if (adminUserExists != null && employeeRoleExists!=null)
+                    await _userManager.AddToRoleAsync(user, "Employee");
+
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+
+                var callbackUrl = Url.Page(
+                    "/Account/ConfirmEmail",
+                    pageHandler: null,
+                    values: new { area = "Identity", userId = user.Id, code = code },
+                    protocol: Request.Scheme);
+
+                await SendConfimEmail(callbackUrl);
+
+                if (_userManager.Options.SignIn.RequireConfirmedAccount)
                 {
-                    _logger.LogInformation("User created a new account with password.");
-
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code },
-                        protocol: Request.Scheme);
-
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }
+                    return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
                 }
-                foreach (var error in result.Errors)
+                else
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return LocalRedirect(returnUrl);
                 }
+            }
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
             }
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        private async Task SendConfimEmail(string callbackUrl)
+        {
+            await _emailSender.SendEmailAsync(Input.Email, "تائید ایمیل",
+                $"لطفا ایمیل خود را با کلیک بر روی <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>این لینک</a> تائید فرمائید.");
         }
     }
 }

@@ -67,7 +67,7 @@ namespace Leave_Management.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"سیستم قادر به دریافت اطلاعات کاربر با شناسه کاربری '{_userManager.GetUserId(User)}' نمی باشد.");
             }
 
             if (!ModelState.IsValid)
@@ -88,7 +88,7 @@ namespace Leave_Management.Areas.Identity.Pages.Account.Manage
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "اطلاعات پروفایل کاربری شما با موفقیت به روز گردید.";
             return RedirectToPage();
         }
     }

@@ -61,7 +61,7 @@ namespace Leave_Management
 
             services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
             services.AddScoped<ILeaveAllocationRepository, LeaveAllocationRepository>();
-            services.AddScoped<ILeaveRequestRepository, LeaveHistoryRepository>();
+            services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
             //services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
             services.AddAutoMapper(typeof(Maps));

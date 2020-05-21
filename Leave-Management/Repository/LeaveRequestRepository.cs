@@ -2,26 +2,35 @@
 using System.Linq;
 using Leave_Management.Contracts;
 using Leave_Management.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Leave_Management.Repository
 {
-    public class LeaveHistoryRepository : ILeaveRequestRepository
+    public class LeaveRequestRepository : ILeaveRequestRepository
     {
         private readonly ApplicationDbContext _db;
 
-        public LeaveHistoryRepository(ApplicationDbContext db)
+        public LeaveRequestRepository(ApplicationDbContext db)
         {
             _db = db;
         }
         public ICollection<LeaveRequest> FindAll()
         {
-            var result = _db.LeaveRequests.ToList();
+            var result = _db.LeaveRequests
+                                            .Include(q => q.RequestingEmployee)
+                                            .Include(q => q.ApprovedBy)
+                                            .Include(q => q.LeaveType)
+                                            .ToList();
             return result;
         }
 
         public LeaveRequest FindById(int id)
         {
-            var result = _db.LeaveRequests.Find(id);
+            var result = _db.LeaveRequests
+                                            .Include(q => q.RequestingEmployee)
+                                            .Include(q => q.ApprovedBy)
+                                            .Include(q => q.LeaveType)
+                                            .FirstOrDefault(q => q.Id == id);
             return result;
         }
 

@@ -5,7 +5,7 @@ using Leave_Management.Data;
 
 namespace Leave_Management.Repository
 {
-    public class LeaveHistoryRepository : ILeaveHistoryRepository
+    public class LeaveHistoryRepository : ILeaveRequestRepository
     {
         private readonly ApplicationDbContext _db;
 
@@ -13,39 +13,39 @@ namespace Leave_Management.Repository
         {
             _db = db;
         }
-        public ICollection<LeaveHistory> FindAll()
+        public ICollection<LeaveRequest> FindAll()
         {
-            var result = _db.LeaveHistories.ToList();
+            var result = _db.LeaveRequests.ToList();
             return result;
         }
 
-        public LeaveHistory FindById(int id)
+        public LeaveRequest FindById(int id)
         {
-            var result = _db.LeaveHistories.Find(id);
+            var result = _db.LeaveRequests.Find(id);
             return result;
         }
 
         public bool IsExists(int id)
         {
-            var exists = _db.LeaveHistories.Any(x => x.Id == id);
+            var exists = _db.LeaveRequests.Any(x => x.Id == id);
             return exists;
         }
 
-        public bool Create(LeaveHistory entity)
+        public bool Create(LeaveRequest entity)
         {
-            _db.LeaveHistories.Add(entity);
+            _db.LeaveRequests.Add(entity);
             return Save();
         }
 
-        public bool Update(LeaveHistory entity)
+        public bool Update(LeaveRequest entity)
         {
-            _db.LeaveHistories.Update(entity);
+            _db.LeaveRequests.Update(entity);
             return Save();
         }
 
-        public bool Delete(LeaveHistory entity)
+        public bool Delete(LeaveRequest entity)
         {
-            _db.LeaveHistories.Remove(entity);
+            _db.LeaveRequests.Remove(entity);
             return Save();
         }
 

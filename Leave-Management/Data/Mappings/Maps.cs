@@ -10,7 +10,7 @@ namespace Leave_Management.Data.Mappings
             CreateMap<LeaveType, LeaveTypeDetailsViewModel>().ReverseMap();
             CreateMap<LeaveType, LeaveTypeCreateViewModel>().ReverseMap();
 
-            CreateMap<LeaveHistory, LeaveHistoryViewModel>().ReverseMap();
+            CreateMap<LeaveRequest, LeaveHistoryViewModel>().ReverseMap();
 
             CreateMap<LeaveAllocation, LeaveAllocationViewModel>().ReverseMap();
             CreateMap<LeaveAllocation, LeaveAllocationEditViewModel>().ReverseMap();

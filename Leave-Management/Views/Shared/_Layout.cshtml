@@ -8,19 +8,33 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Leave_Management</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
-    <link href="~/lib/bootstrap-rtl/bootstrap.rtl.css" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-rtl/bootstrap-rtl.css" rel="stylesheet" />
 
     <link href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/site.css" />
+
+
+    <!-- :: JS -->
+    <!-- :: jQuery -->
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+
+    <!-- :: Popper -->
+    <script src="~/lib/popper/popper.min.js"></script>
+
+    <!-- :: Bootstrap -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+    <!-- :: DataTables -->
+    <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 </head>
-<body>
+<body style="text-align: right; direction: rtl">
     <header>
-        @* ReSharper disable once UnknownCssClass *@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">نرم افزار اتوماسیون مرخصی ها</a>
@@ -85,9 +99,7 @@
         </div>
     </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap-rtl/js/bootstrap.js"></script>
-    <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

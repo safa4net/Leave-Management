@@ -1,15 +1,15 @@
 ﻿@page
 @model DeletePersonalDataModel
 @{
-    ViewData["Title"] = "Delete Personal Data";
+    ViewData["Title"] = "حذف اطلاعات شخصی و اطلاعات حساب کاربری";
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
 }
 
-<h4>@ViewData["Title"]</h4>
+<h4 class="text-danger">@ViewData["Title"]</h4>
 
 <div class="alert alert-warning" role="alert">
     <p>
-        <strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong>
+        <strong>توجه داشته باشید که این فرایند غیرقابل بازگشت است. حذف اطلاعات شخصی باعث حذف کامل اطلاعات حساب کاربری شما می شود.</strong>
     </p>
 </div>
 
@@ -19,12 +19,13 @@
         @if (Model.RequirePassword)
         {
             <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
+                <h6>برای حذف اطلاعات خود می بایست رمز عبور حساب کاربری خود را وارد نمایید.</h6>
+                <label asp-for="Input.Password">رمز عبور</label>
+                <input asp-for="Input.Password" class="form-control"/>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
         }
-        <button class="btn btn-danger" type="submit">Delete data and close my account</button>
+    <button class="btn btn-danger" type="submit">اطلاعات شخصی و حساب کاربری من را حذف کن.</button>
     </form>
 </div>
 

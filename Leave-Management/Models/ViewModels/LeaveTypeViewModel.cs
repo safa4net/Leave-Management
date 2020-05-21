@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace Leave_Management.Models.ViewModels
 {
@@ -15,6 +16,11 @@ namespace Leave_Management.Models.ViewModels
         [Display(Name = "تاریخ ایجاد")]
         [DataType(DataType.Date)]
         public DateTime DateCreated { get; set; }
+
+        [Required]
+        [Display(Name = "تعداد روز پیش فرض")]
+        [Range(1,25,ErrorMessage = "لطفا عددی بین 1 تا 25 را وارد نمائید.")]
+        public int DefaultDays { get; set; }
     }
 
     public class LeaveTypeCreateViewModel
@@ -25,5 +31,10 @@ namespace Leave_Management.Models.ViewModels
         [Required(ErrorMessage = "ورود نام برای {0} الزامی است.")]
         [StringLength(100, ErrorMessage = "تعداد حروف {0} می بایست بین {1} حرف و {2} باشد.", MinimumLength = 3)]
         public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "تعداد روز مجاز سالیانه")]
+        [Range(1,25,ErrorMessage = "لطفا عددی بین 1 تا 25 را وارد نمائید.")]
+        public int DefaultDays { get; set; }
     }
 }

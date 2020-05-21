@@ -37,8 +37,8 @@ namespace Leave_Management
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            //services.AddIdentity<IdentityUser, IdentityRole>()
-            ////     services.AddDefaultIdentity<IdentityUser>()
+            //services.AddIdentity<Employee, IdentityRole>()
+            ////     services.AddDefaultIdentity<Employee>()
             //.AddEntityFrameworkStores<ApplicationDbContext>()
             //.AddDefaultTokenProviders();
 
@@ -66,9 +66,14 @@ namespace Leave_Management
 
             services.AddAutoMapper(typeof(Maps));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddDefaultIdentity<Employee>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddRoles<IdentityRole>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddDefaultIdentity<Employee>()
+                    .AddRoles<IdentityRole>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
@@ -76,7 +81,7 @@ namespace Leave_Management
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app,
                               IWebHostEnvironment env,
-                              UserManager<IdentityUser> userManager,
+                              UserManager<Employee> userManager,
                               RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())

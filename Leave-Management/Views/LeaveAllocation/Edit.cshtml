@@ -1,0 +1,30 @@
+﻿@model Leave_Management.Models.ViewModels.LeaveAllocationEditViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3> ویرایش @Model.LeaveType.Name اختصاص داده شده به @Model.Employee.Firstname @Model.Employee.Lastname</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="EmployeeId" />
+
+            <div class="form-group">
+                <label asp-for="NumberOfDays" class="control-label"></label>
+                <input asp-for="NumberOfDays" class="form-control" />
+                <span asp-validation-for="NumberOfDays" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="ثبت" class="btn btn-primary" />
+                <a class="btn btn-outline-secondary" asp-action="Index">بازگشت</a>
+            </div>
+        </form>
+    </div>
+</div>

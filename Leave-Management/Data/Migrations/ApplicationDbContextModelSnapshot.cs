@@ -29,7 +29,7 @@ namespace Leave_Management.Data.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("EmploeeId")
+                    b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("LeaveTypeId")
@@ -38,9 +38,12 @@ namespace Leave_Management.Data.Migrations
                     b.Property<int>("NumberOfDays")
                         .HasColumnType("int");
 
+                    b.Property<int>("Period")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("EmploeeId");
+                    b.HasIndex("EmployeeId");
 
                     b.HasIndex("LeaveTypeId");
 
@@ -98,6 +101,9 @@ namespace Leave_Management.Data.Migrations
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("DefaultDays")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -343,7 +349,7 @@ namespace Leave_Management.Data.Migrations
                 {
                     b.HasOne("Leave_Management.Data.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("EmploeeId");
+                        .HasForeignKey("EmployeeId");
 
                     b.HasOne("Leave_Management.Data.LeaveType", "LeaveType")
                         .WithMany()

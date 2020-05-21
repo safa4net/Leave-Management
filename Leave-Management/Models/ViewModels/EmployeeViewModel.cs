@@ -5,6 +5,9 @@ namespace Leave_Management.Models.ViewModels
 {
     public class EmployeeViewModel
     {
+        [Key]
+        public string Id { get; set; }
+
         [Display(Name = "نام")]
         [Required(ErrorMessage = "{0} کارمند می بایست وارد شود.")]
         [StringLength(100, ErrorMessage = "تعداد حروف {0} می بایست بین {1} حرف و {2} باشد.", MinimumLength = 3)]
@@ -14,6 +17,9 @@ namespace Leave_Management.Models.ViewModels
         [Required(ErrorMessage = "{0} کارمند می بایست وارد شود.")]
         [StringLength(100, ErrorMessage = "تعداد حروف {0} می بایست بین {1} حرف و {2} باشد.", MinimumLength = 3)]
         public string Lastname { get; set; }
+
+        [Display(Name = "ایمیل")]
+        public string Email { get; set; }
 
         [Display(Name = "تلفن همراه")]
         [Required(ErrorMessage = "{0} کارمند می بایست وارد شود")]

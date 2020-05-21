@@ -1,25 +1,38 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System;
+using Leave_Management.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace Leave_Management
 {
     public static class SeedData
     {
-        public static void Seed(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public static void Seed(UserManager<Employee> userManager, RoleManager<IdentityRole> roleManager)
         {
             SeedRoles(roleManager);
             SeeedUsers(userManager);
         }
 
-        public static void SeeedUsers(UserManager<IdentityUser> userManager)
+        public static void SeeedUsers(UserManager<Employee> userManager)
         {
             if (userManager.FindByNameAsync("Admin").Result == null)
             {
-                var user = new IdentityUser
+                var user = new Employee
                 {
-                    UserName = "Admin",
-                    Email = "admin@localhost"
+                    UserName = "admin",
+                    Email = "admin@localhost.com",
+                    Lastname = "-",
+                    Firstname = "-",
+                    PhoneNumber = "-",
+                    DateCreated = DateTime.Now,
+                    DateJoined = DateTime.Now,
+                    DateOfBirth = DateTime.Now,
+                    EmailConfirmed = true,
+                    NormalizedEmail = "ADMIN@LOCALHOST.COM",
+                    NormalizedUserName = "ADMIN",
+                    TwoFactorEnabled = false
                 };
-                var result = userManager.CreateAsync(user, "@Admin001").Result;
+
+                var result = userManager.CreateAsync(user, "P@ssw0rd1").Result;
                 if (result.Succeeded)
                 {
                     userManager.AddToRoleAsync(user, "Administrator").Wait();
@@ -36,7 +49,7 @@ namespace Leave_Management
                     Name = "Administrator",
                     NormalizedName = "ADMINISTRATOR"
                 };
-                var result=roleManager.CreateAsync(role).Result;
+                var result = roleManager.CreateAsync(role).Result;
             }
 
             if (!roleManager.RoleExistsAsync("Employee").Result)

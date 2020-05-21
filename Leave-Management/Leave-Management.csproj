@@ -10,6 +10,10 @@
     <Compile Remove="Contracts\IEmployeeRepository.cs" />
     <Compile Remove="Data\Migrations\20200517001903_Identity.cs" />
     <Compile Remove="Data\Migrations\20200517001903_Identity.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200519043029_AddedRequiredForDefaultDayInLeaveTypeTable.cs" />
+    <Compile Remove="Data\Migrations\20200519043029_AddedRequiredForDefaultDayInLeaveTypeTable.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200520140018_RenameEmployee.cs" />
+    <Compile Remove="Data\Migrations\20200520140018_RenameEmployee.Designer.cs" />
     <Compile Remove="Repository\EmployeeRepository.cs" />
   </ItemGroup>
 

@@ -1,0 +1,48 @@
+﻿@model Leave_Management.Models.ViewModels.LeaveAllocationCreateViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+
+<table class="table table-hover table-striped" id="tblData">
+    <thead>
+        <tr>
+            <th>
+                نوع مرخصی
+            </th>
+            <th>عملیات
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.LeaveTypes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+
+                <td>
+                    <a class="btn btn-outline-success btn-sm" asp-controller="LeaveAllocation" asp-action="SetLeave" asp-route-id="@item.Id">
+                        <i class="fa fa-pencil"></i>
+                        اختصاص به کارمندان
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#tblData').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Persian.json"
+                }
+            });
+        });
+    </script>
+}

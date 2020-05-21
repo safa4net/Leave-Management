@@ -13,14 +13,16 @@ namespace Leave_Management.Data
 
         public DateTime DateCreated { get; set; }
 
-        [ForeignKey(nameof(EmploeeId))]
+        [ForeignKey(nameof(EmployeeId))]
         public Employee Employee { get; set; }
 
-        public string EmploeeId { get; set; }
+        public string EmployeeId { get; set; }
 
         [ForeignKey(nameof(LeaveTypeId))]
         public LeaveType LeaveType { get; set; }
 
         public int LeaveTypeId { get; set; }
+
+        public int Period { get; set; }
     }
 }

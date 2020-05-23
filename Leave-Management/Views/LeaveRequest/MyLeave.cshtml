@@ -65,19 +65,19 @@
                 <td>
                     @if (item.Cancelled == true)
                     {
-                        <span class="badge badge-secondary">انصراف داده شده<i class="fal fa-trash-alt"></i></span>
+                        <span class="badge badge-secondary font-weight-normal">انصراف داده شده <i class="fal fa-trash-alt"></i></span>
                     }
                     else if (item.Approved == true)
                     {
-                <span class="badge badge-success">تائید شده <i class="fa fa-check"></i></span>
+                        <span class="badge badge-success font-weight-normal">تائید شده <i class="fa fa-check"></i></span>
                     }
                     else if (item.Approved == false)
                     {
-                <span class="badge badge-danger">تائید نشده <i class="fas fa-ban"></i></span>
+                        <span class="badge badge-danger">تائید نشده <i class="fas fa-ban"></i></span>
                     }
                     else
                     {
-                <span class="badge badge-warning">در دست بررسی <i class="far fa-hourglass"></i> </span>
+                        <span class="badge badge-warning">در دست بررسی <i class="far fa-hourglass"></i> </span>
                     }
                 </td>
 
@@ -93,3 +93,7 @@
         }
     </tbody>
 </table>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

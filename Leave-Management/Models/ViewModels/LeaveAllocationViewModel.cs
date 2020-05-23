@@ -34,7 +34,7 @@ namespace Leave_Management.Models.ViewModels
         public List<LeaveTypeDetailsViewModel> LeaveTypes { get; set; }
     }
 
-    public class ViewLeaveAllocationsViewModel
+    public class LeaveAllocationsViewViewModel
     {
         public EmployeeViewModel Employee { get; set; }
         public string EmployeeId { get; set; }

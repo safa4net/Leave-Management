@@ -107,7 +107,7 @@ namespace Leave_Management.Controllers
             var allocations =
                 _mapper.Map<List<LeaveAllocationViewModel>>(_leaveAllocationRepository.GetLeaveAllocationsByEmployee(id));
 
-            var model = new ViewLeaveAllocationsViewModel
+            var model = new LeaveAllocationsViewViewModel
             {
                 Employee = employee,
                 LeaveAllocations = allocations,

@@ -16,6 +16,8 @@
     <Compile Remove="Data\Migrations\20200520140018_RenameEmployee.Designer.cs" />
     <Compile Remove="Data\Migrations\20200521124351_RenameLeaveHistoryToLeaveRequests.cs" />
     <Compile Remove="Data\Migrations\20200521124351_RenameLeaveHistoryToLeaveRequests.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200523092601_AddedCanceledToLeaveRequestTable.cs" />
+    <Compile Remove="Data\Migrations\20200523092601_AddedCanceledToLeaveRequestTable.Designer.cs" />
     <Compile Remove="Repository\EmployeeRepository.cs" />
   </ItemGroup>
 
@@ -190,6 +192,24 @@
     <None Include="wwwroot\lib\bootstrap\scss\_type.scss" />
     <None Include="wwwroot\lib\bootstrap\scss\_utilities.scss" />
     <None Include="wwwroot\lib\bootstrap\scss\_variables.scss" />
+    <None Include="wwwroot\lib\font-awsome\js\all.js" />
+    <None Include="wwwroot\lib\font-awsome\js\all.min.js" />
+    <None Include="wwwroot\lib\font-awsome\js\brands.js" />
+    <None Include="wwwroot\lib\font-awsome\js\brands.min.js" />
+    <None Include="wwwroot\lib\font-awsome\js\conflict-detection.js" />
+    <None Include="wwwroot\lib\font-awsome\js\conflict-detection.min.js" />
+    <None Include="wwwroot\lib\font-awsome\js\duotone.js" />
+    <None Include="wwwroot\lib\font-awsome\js\duotone.min.js" />
+    <None Include="wwwroot\lib\font-awsome\js\fontawesome.js" />
+    <None Include="wwwroot\lib\font-awsome\js\fontawesome.min.js" />
+    <None Include="wwwroot\lib\font-awsome\js\light.js" />
+    <None Include="wwwroot\lib\font-awsome\js\light.min.js" />
+    <None Include="wwwroot\lib\font-awsome\js\regular.js" />
+    <None Include="wwwroot\lib\font-awsome\js\regular.min.js" />
+    <None Include="wwwroot\lib\font-awsome\js\solid.js" />
+    <None Include="wwwroot\lib\font-awsome\js\solid.min.js" />
+    <None Include="wwwroot\lib\font-awsome\js\v4-shims.js" />
+    <None Include="wwwroot\lib\font-awsome\js\v4-shims.min.js" />
     <None Include="wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.js" />
     <None Include="wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.js" />
     <None Include="wwwroot\lib\jquery-validation-unobtrusive\README.md" />
@@ -442,6 +462,10 @@
     <None Include="wwwroot\lib\jquery\src\var\support.js" />
     <None Include="wwwroot\lib\jquery\src\var\toString.js" />
     <None Include="wwwroot\lib\jquery\src\wrap.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\vendor\" />
   </ItemGroup>
 
 </Project>

@@ -4,13 +4,66 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br/>
 
-<!DOCTYPE html>
-
-
+<h1>گزارش درخواست های مرخصی</h1>
+<br/>
+<br/>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="Create" asp-controller="LeaveRequest">
+        <i class="far fa-plus"></i> ثبت مرخصی جدید برای کارمند
+    </a>
 </p>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="card" style="width: 18rem;">
+            @*<img class="card-img-top" src="..." alt="Card image cap">*@
+            <div class="card-body text-center">
+                <h1 class="card-title">@Model.TotalRequests</h1>
+                <p class="card-text">@Html.DisplayNameFor(model => model.TotalRequests)</p>
+                @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card" style="width: 18rem;">
+            @*<img class="card-img-top" src="..." alt="Card image cap">*@
+            <div class="card-body text-center">
+                <h1 class="card-title text-warning">@Model.PendingRequests</h1>
+                <p class="card-text">@Html.DisplayNameFor(model => model.PendingRequests)</p>
+                @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card" style="width: 18rem;">
+            @*<img class="card-img-top" src="..." alt="Card image cap">*@
+            <div class="card-body text-center">
+                <h1 class="card-title text-success">@Model.ApprovedRequests</h1>
+                <p class="card-text">@Html.DisplayNameFor(model => model.ApprovedRequests)</p>
+                @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card" style="width: 18rem;">
+            @*<img class="card-img-top" src="..." alt="Card image cap">*@
+            <div class="card-body text-center">
+                <h1 class="card-title text-danger">@Model.RejectedRequests</h1>
+                <p class="card-text">@Html.DisplayNameFor(model => model.RejectedRequests)</p>
+                @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+
 <table class="table table-hover table-striped" id="tblData">
     <thead>
         <tr>
@@ -39,43 +92,43 @@
     <tbody>
         @foreach (var item in Model.LeaveRequest)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RequestingEmployee.Firstname) @Html.DisplayFor(modelItem => item.RequestingEmployee.Lastname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LeaveType.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequestingEmployee.Firstname) @Html.DisplayFor(modelItem => item.RequestingEmployee.Lastname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LeaveType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.DateRequested)
-            </td>
-            <td>
-                @if (item.Approved == true)
-                {
-                    <span class="badge badge-success">تائید شده</span>
-                }
-                else if (item.Approved == false)
-                {
-                    <span class="badge badge-danger">تائید نشده</span>
-                }
-                else
-                {
-                    <span class="badge badge-warning">در دست بررسی</span>
-                }
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateRequested)
+                </td>
+                <td>
+                    @if (item.Approved == true)
+                    {
+                    <span class="badge badge-success">تائید شده <i class="fa fa-check"></i></span>
+                    }
+                    else if (item.Approved == false)
+                    {
+                <span class="badge badge-danger">تائید نشده <i class="fas fa-ban"></i></span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-warning">در دست بررسی <i class="far fa-hourglass"></i> </span>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-outline-primary btn-sm" asp-action="Details" asp-route-id="@item.Id">
+                        <i class="fal fa-file-alt"></i> جزئیات 
+                    </a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>

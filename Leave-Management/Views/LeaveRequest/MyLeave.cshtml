@@ -1,0 +1,95 @@
+﻿@model Leave_Management.Models.ViewModels.LeaveRequestEmployeeViewViewModel
+
+@{
+    ViewData["Title"] = "MyLeave";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>مرخصی های من</h1>
+<div class="jumbotron">
+    <div class="card">
+        <ul class="list-group list-group-flush">
+            @foreach (var item in Model.LeaveAllocations)
+            {
+                <li class="list-group-item">
+                    <h6>@item.LeaveType.Name <span class="badge badge-primary">@item.NumberOfDays</span></h6>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+<hr />
+<h1>درخواست های مرخصی من</h1>
+<table class="table" id="tblData">
+    <thead>
+        <tr>
+            <th>
+                نوع مرخصی
+            </th>
+            <th>
+                تاریخ شروع
+            </th>
+            <th>
+                تاریخ پایان
+            </th>
+            <th>
+                تاریخ درخواست
+            </th>
+            <th>
+                وضعیت
+            </th>
+            <th>
+                انصراف
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.LeaveRequests)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LeaveType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateRequested, new { @value = item.DateRequested.ToString("yyyy-mm-dd") })
+                </td>
+
+                <td>
+                    @if (item.Cancelled == true)
+                    {
+                        <span class="badge badge-secondary">انصراف داده شده<i class="fal fa-trash-alt"></i></span>
+                    }
+                    else if (item.Approved == true)
+                    {
+                <span class="badge badge-success">تائید شده <i class="fa fa-check"></i></span>
+                    }
+                    else if (item.Approved == false)
+                    {
+                <span class="badge badge-danger">تائید نشده <i class="fas fa-ban"></i></span>
+                    }
+                    else
+                    {
+                <span class="badge badge-warning">در دست بررسی <i class="far fa-hourglass"></i> </span>
+                    }
+                </td>
+
+                <td>
+                    @if (item.Cancelled != null && !(bool)item.Cancelled && item.StartDate > DateTime.Now)
+                    {
+                        <a asp-action="CancelRequest" class="btn btn-danger btn-sm" asp-route-id="@item.Id" onclick="return confirm('آیا از انصراف از این درخواست اطمینان دارید؟')">
+                            <i class="fal fa-trash-alt"></i>
+                        </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

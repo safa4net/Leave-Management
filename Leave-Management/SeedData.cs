@@ -21,15 +21,16 @@ namespace Leave_Management
                     UserName = "admin",
                     Email = "admin@localhost.com",
                     Lastname = "-",
-                    Firstname = "-",
-                    PhoneNumber = "-",
+                    Firstname = "مدیر",
+                    PhoneNumber = "سیستم",
                     DateCreated = DateTime.Now,
                     DateJoined = DateTime.Now,
                     DateOfBirth = DateTime.Now,
                     EmailConfirmed = true,
                     NormalizedEmail = "ADMIN@LOCALHOST.COM",
                     NormalizedUserName = "ADMIN",
-                    TwoFactorEnabled = false
+                    TwoFactorEnabled = false,
+                    
                 };
 
                 var result = userManager.CreateAsync(user, "P@ssw0rd1").Result;

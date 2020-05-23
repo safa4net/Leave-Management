@@ -33,5 +33,10 @@ namespace Leave_Management.Data
         public Employee ApprovedBy { get; set; }
 
         public string ApprovedById { get; set; }
+
+        public bool? Cancelled { get; set; }
+
+        [MaxLength(1000)]
+        public string RequestComments { get; set; }
     }
 }

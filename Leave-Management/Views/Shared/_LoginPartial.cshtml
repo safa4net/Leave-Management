@@ -5,24 +5,70 @@
 @inject UserManager<Employee> UserManager
 
 <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">سلام @User.Identity.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">خروج</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">ثبت نام</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">ورود به سیستم</a>
-    </li>
-}
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="fa fa-user"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
+
+                <span class="dropdown-item dropdown-header">@User.Identity.Name</span>
+
+                <!--Divider-->
+                <div class="dropdown-divider"></div>
+
+                <a asp-area="Identity" asp-page="/Account/Manage/Index" class="dropdown-item">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i> مشاهده پروفایل
+                </a>
+
+                <!--Divider-->
+                <div class="dropdown-divider"></div>
+
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})" class="dropdown-item form-inline">
+                    <button type="submit" class="dropdown-item" style="cursor: pointer; padding-right: initial;">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i> خروج
+                    </button>
+                </form>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
+                <i class="fa fa-th-large"></i>
+            </a>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="fa fa-user"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
+
+                <span class="dropdown-item dropdown-header">ورود / عضویت</span>
+
+                <!--Divider-->
+                <div class="dropdown-divider"></div>
+
+                <a asp-area="Identity" asp-page="/Account/Register" class="dropdown-item">
+                    <i class="fa fa-user-plus" aria-hidden="true"></i> ثبت نام
+                </a>
+
+                <!--Divider-->
+                <div class="dropdown-divider"></div>
+
+                <a asp-area="Identity" asp-page="/Account/Login" class="dropdown-item">
+                    <i class="fa fa-sign-in" aria-hidden="true"></i> ورود به سیستم
+                </a>
+
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
+                <i class="fa fa-th-large"></i>
+            </a>
+        </li>
+    }
 </ul>

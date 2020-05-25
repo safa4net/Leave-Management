@@ -2,13 +2,9 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<br/>
-
 <h1>گزارش درخواست های مرخصی</h1>
-<br/>
-<br/>
+<br />
 <p>
     <a class="btn btn-primary" asp-action="Create" asp-controller="LeaveRequest">
         <i class="far fa-plus"></i> ثبت مرخصی جدید برای کارمند
@@ -16,49 +12,64 @@
 </p>
 
 <div class="row">
-    <div class="col-md-3">
-        <div class="card" style="width: 18rem;">
-            @*<img class="card-img-top" src="..." alt="Card image cap">*@
-            <div class="card-body text-center">
-                <h1 class="card-title">@Model.TotalRequests</h1>
-                <p class="card-text">@Html.DisplayNameFor(model => model.TotalRequests)</p>
-                @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
-            </div>
-        </div>
-    </div>
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-info"><i class="fa fa-envelope-o"></i></span>
 
-    <div class="col-md-3">
-        <div class="card" style="width: 18rem;">
-            @*<img class="card-img-top" src="..." alt="Card image cap">*@
-            <div class="card-body text-center">
-                <h1 class="card-title text-warning">@Model.PendingRequests</h1>
-                <p class="card-text">@Html.DisplayNameFor(model => model.PendingRequests)</p>
-                @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+            <div class="info-box-content">
+                <span class="info-box-text">@Model.TotalRequests</span>
+                <span class="info-box-number text-sm">@Html.DisplayNameFor(model => model.TotalRequests)</span>
             </div>
+            <!-- /.info-box-content -->
         </div>
+        <!-- /.info-box -->
     </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-success">
+                <i class="fa fa-check-circle"></i>
+                @*<i class="fa fa-files-o"></i>*@
+            </span>
 
-    <div class="col-md-3">
-        <div class="card" style="width: 18rem;">
-            @*<img class="card-img-top" src="..." alt="Card image cap">*@
-            <div class="card-body text-center">
-                <h1 class="card-title text-success">@Model.ApprovedRequests</h1>
-                <p class="card-text">@Html.DisplayNameFor(model => model.ApprovedRequests)</p>
-                @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+            <div class="info-box-content">
+                <span class="info-box-text">@Model.ApprovedRequests</span>
+                <span class="info-box-number text-sm">@Html.DisplayNameFor(model => model.ApprovedRequests)</span>
             </div>
+            <!-- /.info-box-content -->
         </div>
+        <!-- /.info-box -->
     </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-warning">
+                <i class="fa fa-exclamation-circle"></i>
+                @*<i class="fa fa-flag-o"></i>*@
+            </span>
 
-    <div class="col-md-3">
-        <div class="card" style="width: 18rem;">
-            @*<img class="card-img-top" src="..." alt="Card image cap">*@
-            <div class="card-body text-center">
-                <h1 class="card-title text-danger">@Model.RejectedRequests</h1>
-                <p class="card-text">@Html.DisplayNameFor(model => model.RejectedRequests)</p>
-                @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+            <div class="info-box-content">
+                <span class="info-box-text">@Model.PendingRequests</span>
+                <span class="info-box-number  text-sm">@Html.DisplayNameFor(model => model.PendingRequests)</span>
             </div>
+            <!-- /.info-box-content -->
         </div>
+        <!-- /.info-box -->
     </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-danger"><i class="fa fa-times-circle"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">@Model.RejectedRequests</span>
+                <span class="info-box-number text-sm">@Html.DisplayNameFor(model => model.RejectedRequests)</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
 </div>
 <br />
 <br />
@@ -112,11 +123,11 @@
                 <td>
                     @if (item.Approved == true)
                     {
-                    <span class="badge badge-success">تائید شده <i class="fa fa-check"></i></span>
+                        <span class="badge badge-success">تائید شده <i class="fa fa-check"></i></span>
                     }
                     else if (item.Approved == false)
                     {
-                <span class="badge badge-danger">تائید نشده <i class="fas fa-ban"></i></span>
+                        <span class="badge badge-danger">تائید نشده <i class="fas fa-ban"></i></span>
                     }
                     else
                     {
@@ -125,7 +136,7 @@
                 </td>
                 <td>
                     <a class="btn btn-outline-primary btn-sm" asp-action="Details" asp-route-id="@item.Id">
-                        <i class="fal fa-file-alt"></i> جزئیات 
+                        <i class="fal fa-file-alt"></i> جزئیات
                     </a>
                 </td>
             </tr>

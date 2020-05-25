@@ -271,3 +271,9 @@ ul {
 .datepicker-plot-area {
     font-family: 'Vazir', sans-serif;
 }
+
+/*---------------------------------- Data Tables ---------------------------------- */
+div.dataTables_wrapper div.dataTables_info {
+    padding-top: 1.3em;
+    white-space: nowrap;
+}

@@ -14,7 +14,9 @@
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
 
-                <span class="dropdown-item dropdown-header">@User.Identity.Name</span>
+                <span class="dropdown-item dropdown-header">
+                    @UserManager.GetUserAsync(User).Result.Firstname @UserManager.GetUserAsync(User).Result.Lastname
+                </span>
 
                 <!--Divider-->
                 <div class="dropdown-divider"></div>

@@ -4,10 +4,6 @@
 @inject UserManager<Employee> UserManager
 
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -26,18 +22,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- bootstrap rtl -->
     <link href="~/vendor/AdminLTE/dist/css/bootstrap-rtl.min.css" rel="stylesheet" />
-    <!-- template rtl version -->
-    <link href="~/vendor/AdminLTE/dist/css/custom-style.css" rel="stylesheet" />
+
 
 
     <!-- :: DataTables -->
-    <link href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" crossorigin="anonymous" />
+    @*<link href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" crossorigin="anonymous" />*@
+    <link href="~/vendor/AdminLTE/plugins/datatables/jquery.dataTables.css" rel="stylesheet" />
 
     <!-- :: DataTables BootStrap CSS -->
-    <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    @*<link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet" />*@
+    <link href="~/vendor/AdminLTE/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
 
     <!-- :: JQuery UI -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    @*<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">*@
+    <link rel="stylesheet" href="~/vendor/AdminLTE/plugins/jQueryUI/jquery-ui.js">
+
+
+
+    <!-- template rtl version -->
+    <link href="~/vendor/AdminLTE/dist/css/custom-style.css" rel="stylesheet" />
 
 
 </head>
@@ -54,9 +57,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li class="nav-item d-none d-sm-inline-block">
                     <a asp-controller="Home" asp-action="Index" class="nav-link">خانه</a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">تماس</a>
-                </li>
+                @*<li class="nav-item d-none d-sm-inline-block">
+                        <a href="#" class="nav-link">تماس</a>
+                    </li>*@
             </ul>
 
             <!-- SEARCH FORM -->
@@ -80,7 +83,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="~/vendor/AdminLTE/index3.html" class="brand-link">
+            <a asp-controller="Home" asp-action="Index" class="brand-link">
                 <img src="~/vendor/AdminLTE/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                      style="opacity: .8">
                 <span class="brand-text font-weight-light">پنل مدیریت</span>
@@ -90,53 +93,122 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="sidebar">
                 <div>
                     <!-- Sidebar user panel (optional) -->
-                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                        <div class="image">
-                            <img src="https://www.gravatar.com/avatar/52f0fbcbedee04a121cba8dad1174462?s=200&d=mm&r=g" class="img-circle elevation-2" alt="User Image">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                            @*<div class="image">
+                                    <img src="https://www.gravatar.com/avatar/52f0fbcbedee04a121cba8dad1174462?s=200&d=mm&r=g" class="img-circle elevation-2" alt="User Image">
+                                </div>*@
+                            <div class="info">
+                                <span class="text-white">@UserManager.GetUserAsync(User).Result.Firstname @UserManager.GetUserAsync(User).Result.Lastname</span>
+
+                                <a asp-area="Identity" asp-page="/Account/Manage/Index" class="text-sm" title="مشاهده پروفایل">
+                                    (پروفایل)
+                                </a>
+
+                            </div>
                         </div>
-                        <div class="info">
-                            <a href="#" class="d-block">حسام موسوی</a>
+                    }
+                    else
+                    {
+                        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                            @*<div class="image">
+                                    <img src="https://www.gravatar.com/avatar/52f0fbcbedee04a121cba8dad1174462?s=200&d=mm&r=g" class="img-circle elevation-2" alt="User Image">
+                                </div>*@
+                            <div class="info">
+                                <span class="d-block text-white">سیستم اتوماسیون مرخصی ها</span>
+                                @*<a asp-area="Identity" asp-page="/Account/Manage/Index" class="d-block">
+                                        @UserManager.GetUserAsync(User).Result.Firstname @UserManager.GetUserAsync(User).Result.Lastname
+                                    </a>*@
+                            </div>
                         </div>
-                    </div>
+                    }
+
 
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                            <!-- Add icons to the links using the .nav-icon class
-                        with font-awesome or any other icon font library -->
-                            @* ReSharper disable once UnknownCssClass *@
-                            <li class="nav-item has-treeview menu-open">
-                                <a href="#" class="nav-link active">
-                                    <i class="nav-icon fa fa-dashboard"></i>
-                                    <p>
-                                        صفحات شروع
-                                        <i class="right fa fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link active">
-                                            <i class="fa fa-circle-o nav-icon"></i>
-                                            <p>صفحه فعال</p>
+
+                            <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
+
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                if (User.IsInRole("Administrator"))
+                                {
+                                    @* ReSharper disable once UnknownCssClass *@
+                                    <li class="nav-item has-treeview menu-open">
+                                        <a href="#" class="nav-link active text-sm">
+                                            <i class="nav-icon fa fa-dashboard"></i>
+                                            <p>
+                                                مدیریت مرخصی ها
+                                                <i class="right fa fa-angle-left"></i>
+                                            </p>
                                         </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a asp-controller="LeaveTypes" asp-action="Index" class="nav-link text-sm">
+                                                    <i class="fa fa-circle-o nav-icon"></i>
+                                                    <p>انواع مرخصی</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a asp-controller="LeaveAllocation" asp-action="Index" class="nav-link text-sm">
+                                                    <i class="fa fa-circle-o nav-icon"></i>
+                                                    <p>اختصاص مرخصی به کارمندان</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a asp-controller="LeaveAllocation" asp-action="ListEmployees" class="nav-link text-sm">
+                                                    <i class="fa fa-circle-o nav-icon"></i>
+                                                    <p>فهرست کارمندان</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a asp-controller="LeaveRequest" asp-action="Index" class="nav-link text-sm">
+                                                    <i class="fa fa-circle-o nav-icon"></i>
+                                                    <p>گزارش درخواست های مرخصی</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a asp-controller="LeaveRequest" asp-action="Create" class="nav-link text-sm">
+                                                    <i class="fa fa-circle-o nav-icon"></i>
+                                                    <p>ثبت درخواست مرخصی</p>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="fa fa-circle-o nav-icon"></i>
-                                            <p>صفحه غیر فعال</p>
+                                }
+                                else
+                                {
+                                    @* ReSharper disable once UnknownCssClass *@
+                                    <li class="nav-item has-treeview menu-open">
+                                        <a href="#" class="nav-link active text-sm">
+                                            <i class="nav-icon fa fa-dashboard"></i>
+                                            <p>
+                                                مرخصی ها
+                                                <i class="right fa fa-angle-left"></i>
+                                            </p>
                                         </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a asp-area="" asp-controller="LeaveRequest" asp-action="MyLeave" class="nav-link text-sm">
+                                                    <i class="fa fa-circle-o nav-icon"></i>
+                                                    <p>مرخصی های من</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a asp-area="" asp-controller="LeaveRequest" asp-action="Create" class="nav-link active text-sm">
+                                                    <i class="fa fa-circle-o nav-icon"></i>
+                                                    <p>درخواست مرخصی جدید</p>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fa fa-th"></i>
-                                    <p>
-                                        لینک ساده
-                                        <span class="right badge badge-danger">جدید</span>
-                                    </p>
-                                </a>
-                            </li>
+                                }
+                            }
+
+                            <!--لینک ساده-->
+                            @*<li class="nav-item"><a href="#" class="nav-link"><i class="nav-icon fa fa-th"></i><p>لینک ساده<span class="right badge badge-danger">جدید</span></p></a></li>*@
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
@@ -151,9 +223,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">صفحه سریع</h1>
-                        </div><!-- /.col -->
+                        <div class="col-sm-6"><h1 class="m-0 text-dark">@ViewData["Title"]</h1></div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-left">
                                 <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">خانه</a></li>
@@ -165,7 +235,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <!-- /.content-header -->
             <!-- Main content -->
-            @RenderBody()
+            <div class="content">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+            </div>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -182,10 +256,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <footer class="main-footer">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline">
-                Anything you want
+                سیستم اتوماسیون مرخصی ها - @DateTime.Now.ToString("yyyy")  &copy;
+                @*- <a asp-area="" asp-controller="Home" asp-action="Privacy">سیاسیت محرمانگی</a>*@
             </div>
             <!-- Default to the left -->
-            <strong>CopyLeft &copy; 2018 <a href="http://github.com/hesammousavi/">حسام موسوی</a>.</strong>
+            @*<strong>CopyLeft &copy; 2018 <a href="http://github.com/hesammousavi/">حسام موسوی</a>.</strong>*@
         </footer>
 
     </div>
@@ -198,7 +273,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="~/vendor/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- :: DataTables -->
-    <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    @*<script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>*@
+    <script src="~/vendor/AdminLTE/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+    <script src="~/vendor/AdminLTE/plugins/datatables/dataTables.bootstrap4.js" type="text/javascript"></script>
+
 
     <!-- AdminLTE App -->
     <script src="~/vendor/AdminLTE/dist/js/adminlte.min.js"></script>

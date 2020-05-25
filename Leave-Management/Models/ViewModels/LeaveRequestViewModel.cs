@@ -60,13 +60,13 @@ namespace Leave_Management.Models.ViewModels
         [Display(Name = "مجموع درخواست ها")]
         public int TotalRequests { get; set; }
 
-        [Display(Name = "درخواست های تائید شده")]
+        [Display(Name = "تائید شده")]
         public int ApprovedRequests { get; set; }
 
-        [Display(Name = "درخواست های در دست بررسی")]
+        [Display(Name = "در دست بررسی")]
         public int PendingRequests { get; set; }
 
-        [Display(Name = "درخواست های رد شده")]
+        [Display(Name = "رد شده")]
         public int RejectedRequests { get; set; }
 
         public List<LeaveRequestViewModel> LeaveRequest { get; set; }

@@ -1,13 +1,12 @@
 ﻿@model Leave_Management.Models.ViewModels.LeaveRequestAdminViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "گزارش درخواست های مرخصی";
 }
-<h1>گزارش درخواست های مرخصی</h1>
 <br />
 <p>
     <a class="btn btn-primary" asp-action="Create" asp-controller="LeaveRequest">
-        <i class="far fa-plus"></i> ثبت مرخصی جدید برای کارمند
+        <i class="fa fa-plus"></i> ثبت مرخصی جدید برای کارمند
     </a>
 </p>
 
@@ -72,77 +71,105 @@
     <!-- /.col -->
 </div>
 <br />
-<br />
-<br />
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <!--card-header-->
+            <div class="card-header">
+                <h3 class="card-title">@ViewData["Title"]</h3>
+            </div>
+            <!-- /.card-header -->
+            <!--card body-->
+            <div class="card-body">
+                <div id="example2_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6"></div>
+                        <div class="col-sm-12 col-md-6"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="tblData" class="table table-bordered table-hover dataTable" role="grid">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending"
+                                            aria-label="نام کارمند : activate to sort column descending" style="width: 250px;">
+                                            نام کارمند
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                            aria-label=" نوع مرخصی : activate to sort column ascending" style="width: 446px;">
+                                            نوع مرخصی
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                            aria-label=" تاریخ شروع : activate to sort column ascending" style="width: 446px;">
+                                            تاریخ شروع
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                            aria-label=" تاریخ پایان : activate to sort column ascending" style="width: 446px;">
+                                            تاریخ پایان
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                            aria-label=" تاریخ درخواست : activate to sort column ascending" style="width: 446px;">
+                                            تاریخ درخواست
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                            aria-label=" وضعیت درخواست : activate to sort column ascending" style="width: 446px;">
+                                            وضعیت درخواست
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                            aria-label=" : activate to sort column ascending" style="width: 416px;">
 
-<table class="table table-hover table-striped" id="tblData">
-    <thead>
-        <tr>
-            <th>
-                نام کارمند
-            </th>
-            <th>
-                نوع مرخصی
-            </th>
-            <th>
-                تاریخ شروع
-            </th>
-            <th>
-                تاریخ پایان
-            </th>
-            <th>
-                تاریخ درخواست
-            </th>
-            <th>
-                وضعیت درخواست
-            </th>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.LeaveRequest)
+                                    {
+                                        <tr role="row" class="odd">
+                                            <td class="sorting_1">
+                                                @Html.DisplayFor(modelItem => item.RequestingEmployee.Firstname) @Html.DisplayFor(modelItem => item.RequestingEmployee.Lastname)
+                                            </td>
+                                            <td>@Html.DisplayFor(modelItem => item.LeaveType.Name)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.DateRequested)</td>
+                                            <td>
+                                                @if (item.Approved == true)
+                                                {
+                                                    <span class="badge badge-success">تائید شده <i class="fa fa-check"></i></span>
+                                                }
+                                                else if (item.Approved == false)
+                                                {
+                                                    <span class="badge badge-danger">تائید نشده <i class="fa fa-ban"></i></span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge badge-warning">در دست بررسی <i class="fa fa-hourglass"></i> </span>
+                                                }
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-outline-primary btn-sm" asp-action="Details" asp-route-id="@item.Id">
+                                                    <i class="fal fa-file-alt"></i> جزئیات
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5"></div>
+                        <div class="col-sm-12 col-md-7">
+                            @*<div class="dataTables_paginate paging_simple_numbers" id="example2_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">قبلی</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">بعدی</a></li></ul></div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</div>
 
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.LeaveRequest)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RequestingEmployee.Firstname) @Html.DisplayFor(modelItem => item.RequestingEmployee.Lastname)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LeaveType.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateRequested)
-                </td>
-                <td>
-                    @if (item.Approved == true)
-                    {
-                        <span class="badge badge-success">تائید شده <i class="fa fa-check"></i></span>
-                    }
-                    else if (item.Approved == false)
-                    {
-                        <span class="badge badge-danger">تائید نشده <i class="fas fa-ban"></i></span>
-                    }
-                    else
-                    {
-                        <span class="badge badge-warning">در دست بررسی <i class="far fa-hourglass"></i> </span>
-                    }
-                </td>
-                <td>
-                    <a class="btn btn-outline-primary btn-sm" asp-action="Details" asp-route-id="@item.Id">
-                        <i class="fal fa-file-alt"></i> جزئیات
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
 @section Scripts{
     <script>
         $(document).ready(function () {

@@ -1,45 +1,44 @@
 ﻿@model Leave_Management.Models.ViewModels.LeaveTypeDetailsViewModel
 
 @{
-    ViewData["Title"] = "ویرایش مرخصی";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
-    Layout = "~/Views/Shared/_AdminLTE.cshtml";
+    ViewData["Title"] = "ویرایش اطلاعات مرخصی";
 }
-
-<h1>ویرایش نوع مرخصی</h1>
-
-@*<h4>LeaveTypeDetailsViewModel</h4>*@
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<div class="col-md-6">
+    <div class="card card-warning">
+        <div class="card-header">
+            <h3 class="card-title">ویرایش اطلاعات مرخصی @Model.Name</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form role="form" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="DateCreated" />
 
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+            <div class="card-body">
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" type="text" class="form-control">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DefaultDays"></label>
+                    <input asp-for="DefaultDays" type="text" class="form-control">
+                    <span asp-validation-for="DefaultDays" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="DefaultDays" class="control-label"></label>
-                <input asp-for="DefaultDays" class="form-control" />
-                <span asp-validation-for="DefaultDays" class="text-danger"></span>
-            </div>
-            @*<div class="form-group">
-                    <label asp-for="DateCreated" class="control-label"></label>
-                    <input asp-for="DateCreated" class="form-control" />
-                    <span asp-validation-for="DateCreated" class="text-danger"></span>
-                </div>*@
-            <div class="form-group">
-                <input type="submit" value="ثبت تغییرات" class="btn btn-success" />
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-warning">ثبت تغییرات</button>
                 <a class="btn btn-outline-secondary" asp-action="Index">بازگشت به فهرست</a>
+                <button type="reset" class="btn btn-default float-left">لغو</button>
             </div>
         </form>
     </div>
 </div>
+
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

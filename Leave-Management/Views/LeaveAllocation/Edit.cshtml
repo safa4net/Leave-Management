@@ -1,12 +1,8 @@
 ﻿@model Leave_Management.Models.ViewModels.LeaveAllocationEditViewModel
 
 @{
-    ViewData["Title"] = "Edit";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
-    Layout = "~/Views/Shared/_AdminLTE.cshtml";
+    ViewData["Title"] = "ویرایش " + @Model.LeaveType.Name + " اختصاص داده شده به " + @Model.Employee.Firstname + " " + @Model.Employee.Lastname;
 }
-
-<h3> ویرایش @Model.LeaveType.Name اختصاص داده شده به @Model.Employee.Firstname @Model.Employee.Lastname</h3>
 
 <hr />
 <div class="row">
